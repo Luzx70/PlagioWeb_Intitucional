@@ -14,3 +14,5 @@ Aplicación web con IA para comparación de textos, detección de similitud y pa
 
 ## Licencia
 MIT
+
+## Local
