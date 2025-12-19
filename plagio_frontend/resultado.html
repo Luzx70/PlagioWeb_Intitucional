@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resultado del Análisis</title>
+
+  <!-- ✅ Netlify: no existe url_for('static'...) -->
+  <!-- Si tenés un style.css propio, usá esta línea (opcional):
+  <link rel="stylesheet" href="css/style.css">
+  -->
+
+  <style>
+    body {
+      background: #1e293b;
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      color: #e2e8f0;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: #0f172a;
+      font-size: 1.9rem;
+    }
+
+    .sub {
+      margin: 0 0 8px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #1e293b;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      margin: 10px 0 18px;
+      color: #0f172a;
+      background: #e2e8f0;
+    }
+
+    /* Donut */
+    .donut {
+      --p: 0;
+      --c-plagio: #ff3b30;
+      --c-resto: #6f42c1;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      margin: 10px auto 18px;
+      position: relative;
+      background: conic-gradient(var(--c-plagio) calc(var(--p)*1%), var(--c-resto) 0);
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+    .donut:after {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+    .valor {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 2.1rem;
+      color: #0f172a;
+      z-index: 2;
+    }
+
+    /* Leyenda */
+    .legend {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 10px 0 26px;
+    }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #1e293b;
+    }
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+    .dot.rojo { background: #ff3b30; }
+    .dot.violeta { background: #6f42c1; }
+
+    /* Tabla */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #334155;
+      color: #ffffff;
+      padding: 12px;
+    }
+    td {
+      padding: 10px;
+      color: #1e293b;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    tr:nth-child(even) { background: #f1f5f9; }
+    tr:hover { background: #e2e8f0; }
+
+    /* Enlaces web */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+    }
+    ul li { margin: 10px 0; color: #1e293b; }
+    ul li a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    ul li a:hover { text-decoration: underline; }
+
+    /* Botón volver */
+    .btn {
+      display: inline-block;
+      background: #00a884;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #008f70; }
+
+    .btn-danger {
+      display: inline-block;
+      background: #ef4444;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      margin-top: 12px;
+      transition: 0.3s;
+      margin-left: 10px;
+    }
+    .btn-danger:hover { background: #dc2626; }
+
+    .foot {
+      margin-top: 25px;
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    /* Overlay progreso */
+    #loadingOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+    }
+
+    .progress-container {
+      width: 60%;
+      max-width: 500px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .progress-bar {
+      height: 25px;
+      width: 0%;
+      background: linear-gradient(90deg, #b91c1c, #f87171);
+      transition: width 0.3s ease;
+    }
+
+    #progressText {
+      margin-top: 15px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .empty {
+      color: #1e293b;
+      background: #f1f5f9;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 14px;
+      margin: 18px auto;
+      max-width: 700px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Overlay de progreso -->
+  <div id="loadingOverlay">
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <p id="progressText">Cargando resultados... 0%</p>
+  </div>
+
+  <div class="wrap">
+    <h1>📊 Resultado del Análisis</h1>
+
+    <div class="sub" id="subtitulo">NIVEL DE PLAGIO — 0%</div>
+    <div class="badge" id="badge">Clasificación: -</div>
+
+    <!-- Donut -->
+    <div class="donut" id="donut" style="--p: 0;">
+      <div class="valor" id="valorDonut">0%</div>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot rojo"></i> <b id="plagioPct">0%</b> Nivel de plagio</span>
+      <span><i class="dot violeta"></i> <b id="noPlagioPct">100%</b> No plagiado / parafraseado</span>
+    </div>
+
+    <div class="empty" id="sinDatos" style="display:none;">
+      No hay resultados guardados. Volvé a <b>Analizar Documento</b> y probá de nuevo.
+    </div>
+
+    <table id="tablaResultados">
+      <thead>
+        <tr>
+          <th style="text-align:left">Documento</th>
+          <th>Coincidencia Exacta (%)</th>
+          <th>TF-IDF (%)</th>
+          <th>IA Semántica (%)</th>
+          <th>Promedio (%)</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyResultados"></tbody>
+    </table>
+
+    <div id="bloqueWeb" style="display:none;">
+      <h3 style="margin-top:30px;color:#0f172a;">🌐 Posibles coincidencias encontradas en Internet</h3>
+      <ul id="listaWeb"></ul>
+    </div>
+
+    <a class="btn" href="index.html">⬅ Volver</a>
+    <a class="btn-danger" href="#" id="btnLimpiar">🧹 Limpiar resultado</a>
+
+    <div class="foot">⭐ 4.9/5 — Detector de Plagio Profesional ©2025</div>
+  </div>
+
+  <script>
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function fmt(n) {
+      const num = Number(n);
+      if (Number.isNaN(num)) return "0.00";
+      return num.toFixed(2);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Overlay progreso (solo visual)
+      const overlay = document.getElementById("loadingOverlay");
+      const bar = document.getElementById("progressBar");
+      const text = document.getElementById("progressText");
+
+      overlay.style.display = "flex";
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          setTimeout(() => overlay.style.display = "none", 500);
+        }
+        bar.style.width = progress + "%";
+        text.textContent = `Cargando resultados... ${Math.round(progress)}%`;
+      }, 200);
+
+      // Leer resultado desde localStorage
+      const raw = localStorage.getItem("resultado");
+      if (!raw) {
+        document.getElementById("sinDatos").style.display = "block";
+        document.getElementById("tablaResultados").style.display = "none";
+        document.getElementById("bloqueWeb").style.display = "none";
+        return;
+      }
+
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (e) {
+        document.getElementById("sinDatos").style.display = "block";
+        document.getElementById("tablaResultados").style.display = "none";
+        document.getElementById("bloqueWeb").style.display = "none";
+        return;
+      }
+
+      // Datos principales
+      const promedioTotal = clamp(Number(data.promedio_total ?? 0), 0, 100);
+      const clasificacion = data.clasificacion ?? "-";
+
+      document.getElementById("subtitulo").textContent = `NIVEL DE PLAGIO — ${fmt(promedioTotal)}%`;
+      document.getElementById("badge").textContent = `Clasificación: ${clasificacion}`;
+
+      // Donut + leyendas
+      const donut = document.getElementById("donut");
+      donut.style.setProperty("--p", promedioTotal);
+
+      document.getElementById("valorDonut").textContent = `${fmt(promedioTotal)}%`;
+      document.getElementById("plagioPct").textContent = `${fmt(promedioTotal)}%`;
+
+      const noPlagio = clamp(100 - promedioTotal, 0, 100);
+      document.getElementById("noPlagioPct").textContent = `${fmt(noPlagio)}%`;
+
+      // Tabla resultados
+      const tbody = document.getElementById("tbodyResultados");
+      tbody.innerHTML = "";
+
+      const resultados = Array.isArray(data.resultados) ? data.resultados : [];
+      if (resultados.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:left;color:#1e293b;">
+              No se encontraron documentos base para comparar (o la base está vacía).
+            </td>
+          </tr>
+        `;
+      } else {
+        for (const r of resultados) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td style="text-align:left">${r.archivo ?? "-"}</td>
+            <td>${fmt(r.exacto ?? 0)}</td>
+            <td>${fmt(r.tfidf ?? 0)}</td>
+            <td>${fmt(r.semantico ?? 0)}</td>
+            <td><b>${fmt(r.promedio ?? 0)}</b></td>
+          `;
+          tbody.appendChild(tr);
+        }
+      }
+
+      // Coincidencias web
+      const web = Array.isArray(data.coincidencias_web) ? data.coincidencias_web : [];
+      const bloqueWeb = document.getElementById("bloqueWeb");
+      const listaWeb = document.getElementById("listaWeb");
+
+      if (web.length > 0) {
+        bloqueWeb.style.display = "block";
+        listaWeb.innerHTML = "";
+        for (const c of web) {
+          const li = document.createElement("li");
+          const titulo = c.titulo ?? "Sin título";
+          const enlace = c.enlace ?? "#";
+          const desc = c.descripcion ?? "";
+          li.innerHTML = `<a href="${enlace}" target="_blank" rel="noopener noreferrer">${titulo}</a> — ${desc}`;
+          listaWeb.appendChild(li);
+        }
+      } else {
+        bloqueWeb.style.display = "none";
+      }
+
+      // Botón limpiar
+      const btnLimpiar = document.getElementById("btnLimpiar");
+      btnLimpiar.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("resultado");
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+</html>

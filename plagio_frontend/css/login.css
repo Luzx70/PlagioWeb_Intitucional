@@ -1,0 +1,253 @@
+/* ==============================
+   FONDO ORIGINAL FACITEC
+============================== */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+ background: url("../img/fondo.png") no-repeat center top fixed;
+  background-size: cover;
+  background-position-y: 0px; /* 🔹 baja la imagen unos 60px */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.25); /* 🔹 más opaco */
+  backdrop-filter: blur(3px); /* 🔹 más difuminado */
+  z-index: 0;
+}
+
+/* ==============================
+   CONTENEDOR PRINCIPAL
+============================== */
+.login-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 62px; /* 🔹 sube el formulario un poco */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==============================
+   FORMULARIO PRINCIPAL
+============================== */
+.loginform {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  width: 428px;           /* 🔹 más angosto */
+  padding: 60px 35px;     /* 🔹 más proporcionado */
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ==============================
+   LOGO FACITEC
+============================== */
+.login-logo img {
+  width: 268px;          /* 🔹 ajustado a proporción real */
+  margin-bottom: 27px;
+  transition: transform 0.3s ease;
+}
+
+/* ==============================
+   CAMPOS DE FORMULARIO
+============================== */
+.login-form input {
+  width: 90%;
+  height: 42px;           /* 🔹 más alto */
+  padding: 0 12px;
+  margin-bottom: 15px;
+  font-size: 15.5px;
+  border: 1px solid #9a9a9a;  /* 🔹 borde más fino */
+  border-radius: 6px;
+  background-color: #fff;
+  color: #111;
+  line-height: 36px;
+  transition: all 0.15s ease-in-out;
+}
+
+.login-form input::placeholder {
+  color: #6f7277;
+  font-size: 18px;
+  font-weight: 450;
+}
+
+/* 🔹 Efecto foco */
+.login-form input:focus {
+  border: 2.5px solid #b21c1c;
+  box-shadow: 0 0 0 3px rgba(178, 28, 28, 0.15);
+  outline: none;
+}
+
+/* ==============================
+   BOTÓN ACCEDER
+============================== */
+.btn-acceder {
+  background-color: #bb1212;
+  color: white;
+  border: none;
+  padding: 12px 25px;   /* 🔹 más fino */
+  border-radius: 8px;
+  font-weight: 530;
+  font-size: 17.5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: block;
+  margin-top: 6px;
+  margin-left: 0px;
+  text-align: left;
+}
+
+.btn-acceder:hover {
+  background-color: #971212;
+}
+
+/* ==============================
+   ENLACE OLVIDÓ CONTRASEÑA
+============================== */
+.login-form-forgotpassword {
+  margin-top: 6px;
+  text-align: left;
+}
+
+.login-form-forgotpassword a {
+  color: #b91c1c;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.login-form-forgotpassword a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   DIVISOR Y BOTÓN COOKIES (ESTILO FACITEC)
+============================== */
+hr {
+  border: none;
+  border-top: 1px solid #e3e5e8;
+  margin: 20px 0 18px 0;
+}
+
+.btn-cookies {
+  background-color: #dcdfe2;
+  color: #111827;
+  border: 1px solid #c6c9cd;
+  padding: 9px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  display: block;
+  margin-top: 4px;
+  margin-left: 0;
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-cookies:hover {
+  background-color: #e7eaed;
+  border-color: #bfc2c5;
+}
+
+/* ==============================
+   MODAL DE COOKIES (FACITEC ORIGINAL)
+============================== */
+.modal-cookies {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+/* Centrado vertical exacto del aviso de cookies (ligeramente más arriba) */
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 3px solid #bb1212;
+  width: 430px;
+  max-width: 90%;
+  position: absolute;
+  top: 40%; /* 🔹 antes 50%, sube un poco */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 35px 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: fadeSlideDown 0.35s ease-in-out;
+}
+
+
+/* título */
+.modal-content h2 {
+  color: #111;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* texto */
+.modal-content p {
+  font-size: 15px;
+  color: #333;
+  text-align: justify;
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+/* botón OK */
+.btn-modal-ok {
+  background-color: #bb1212;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 550;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.btn-modal-ok:hover {
+  background-color: #9e1111;
+}
+
+/* botón cerrar (X) */
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #555;
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  color: #b21c1c;
+}
+
+/* pie del modal */
+.modal-footer {
+  display: flex;
+  justify-content: center; /* centrado como el original FACITEC */
+  margin-top: 20px;
+}

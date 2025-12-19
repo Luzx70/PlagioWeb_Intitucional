@@ -1,0 +1,448 @@
+/* ==============================
+   ESTILO GENERAL INSTITUCIONAL FACITEC - UNICAN
+============================== */
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: #f5f6f7; /* mismo color */
+  color: #2e2e2e;
+  margin: 0;
+}
+
+
+/* ==============================
+   ENCABEZADO FACITEC
+============================== */
+.header-facitec {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 3px solid #b91c1c;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom: 0;
+}
+
+/* Barra superior */
+.barra-superior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 12px 20px;
+}
+
+.logo-facitec {
+  height: 65px;
+  width: auto;
+}
+
+.logo-roc {
+  height: 45px;
+  width: auto;
+  margin-left: 10px;
+  opacity: 0.85;
+}
+
+.info-facitec h1 {
+  font-size: 1.4rem;
+  color: #b91c1c;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.info-facitec p {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 2px 0 0 0;
+}
+
+/* Barra inferior roja */
+.nav-facitec {
+  background: #b91c1c;
+  color: white;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 9px 0;
+  letter-spacing: 0.5px;
+}
+
+/* ==============================
+   PANEL DIVIDIDO (FULL WIDTH)
+============================== */
+.panel-dividido {
+  min-height: calc(100vh - 260px);
+}
+
+
+/* Panel individual */
+.panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 35px 40px;
+  flex: 1;
+  min-width: 480px;
+  transition: 0.3s ease;
+  border-radius: 0;
+}
+.panel.izquierda {
+  border-right: 1px solid #e2e8f0;
+}
+.panel.derecha {
+  border-left: 1px solid #e2e8f0;
+}
+.panel h2 {
+  font-size: 1.3rem;
+  color: #111827;
+  margin-bottom: 20px;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 950px) {
+  .panel-dividido {
+    flex-direction: column;
+  }
+
+  .panel {
+    min-width: 100%;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 25px 20px;
+  }
+
+  .panel.izquierda {
+    border-right: none;
+  }
+}
+
+/* ==============================
+   BOTONES INSTITUCIONALES
+============================== */
+.btn-subir, .btn-detectar {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-subir {
+  background: #b91c1c;
+  color: #fff;
+  padding: 12px 22px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(185,28,28,0.35);
+}
+.btn-subir:hover {
+  background: #9b1616;
+}
+
+.btn-detectar {
+  margin-top: 25px;
+  width: 100%;
+  background: #374151;
+  color: white;
+  padding: 14px;
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.btn-detectar:hover {
+  background: #1f2937;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* ==============================
+   VISTA PREVIA
+============================== */
+.vista-previa textarea {
+  width: 100%;
+  height: 160px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  background: #f8fafc;
+  resize: none;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* ==============================
+   LISTA DE ARCHIVOS BASE
+============================== */
+.lista-biblioteca {
+  margin-top: 25px;
+}
+.lista-biblioteca h3 {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 10px;
+}
+.lista-biblioteca ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e0e7ee;
+}
+.lista-biblioteca li {
+  font-size: 0.9rem;
+  color: #2f3b45;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  word-break: break-word;
+}
+.lista-biblioteca li:last-child {
+  border-bottom: none;
+}
+.lista-biblioteca li::before {
+  content: "📄";
+  font-size: 1rem;
+}
+.lista-biblioteca li.vacio {
+  color: #9ca3af;
+  text-align: center;
+  font-style: italic;
+  border: none;
+}
+
+/* ==============================
+   LOADER
+============================== */
+.loader {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 999;
+}
+.spinner {
+  border: 5px solid #e5e7eb;
+  border-top: 5px solid #b91c1c;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loader p {
+  margin-top: 15px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* ==============================
+   PIE DE PÁGINA INSTITUCIONAL
+============================== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #4b5563;
+  border-top: 2px solid #b91c1c;
+  margin-top: auto;
+}
+.footer b {
+  color: #b91c1c;
+}
+/* ==============================
+   BARRA SUPERIOR CONTACTO
+============================== */
+.barra-contacto {
+  background: #f8f8f8;
+  font-size: 0.9rem;
+  padding: 4px 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.contenido-barra {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+.contenido-barra a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+}
+.contenido-barra a:hover {
+  color: #b91c1c;
+}
+.contenido-barra .social a {
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+/* ==============================
+   PIE DE PÁGINA OSCURO
+============================== */
+.footer-facitec {
+  width: 100%;
+  background: #1e1e1e;
+  color: #ddd;
+  padding-top: 40px;
+  font-size: 0.9rem;
+}
+
+.footer-facitec .footer-contenido {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 0 20px 30px;
+}
+.footer-facitec h4 {
+  color: #fff;
+  margin-bottom: 8px;
+}
+.footer-facitec ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-facitec li {
+  margin-bottom: 6px;
+}
+.footer-facitec a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+.footer-facitec a:hover {
+  color: #b91c1c;
+}
+.footer-facitec .logo-footer img {
+  height: 60px;
+  opacity: 0.85;
+}
+.footer-facitec .footer-base {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+.footer-facitec .social a {
+  color: #b91c1c;
+  margin: 0 5px;
+  font-weight: 600;
+}
+.footer-facitec .social a:hover {
+  text-decoration: underline;
+}
+/* ==============================
+   ÍCONOS SOCIALES REALES
+============================== */
+.icono-social {
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin: 0 5px;
+  filter: grayscale(30%);
+  transition: 0.2s ease;
+}
+.icono-social:hover {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+}
+
+.icono-social-footer {
+  height: 24px;
+  width: 24px;
+  margin: 0 8px;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+.icono-social-footer:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+/* ==============================
+   BOTÓN LOGIN FACITEC
+============================== */
+.contenedor-login {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.btn-login-facitec {
+  background: #b91c1c;
+  color: #fff;
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.btn-login-facitec:hover {
+  background: #9a1515;
+  transform: translateY(-2px);
+}
+/* ==============================
+   LISTA DE ARCHIVOS CON BOTÓN X (FACITEC)
+============================== */
+.lista-archivos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-archivos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e0e7ee;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  transition: background 0.2s ease;
+}
+
+.lista-archivos li:hover {
+  background: #fff3f3;
+}
+
+.lista-archivos li span {
+  color: #2f3b45;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.btn-eliminar {
+  background: #b91c1c;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease-in-out, transform 0.15s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.btn-eliminar:hover {
+  background: #9a1515;
+  transform: scale(1.08);
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+</head>
+
+<body>
+ 
+
+  <form
+    id="campusForm"
+    method="POST"
+    action="https://campusvirtual.facitec.edu.py/login/index.php?loginredirect=1"
+  >
+    <input type="hidden" name="username" value="{{ username }}">
+    <input type="hidden" name="password" value="{{ password }}">
+    <input type="hidden" name="Acceder" value="Acceder">
+  </form>
+
+  <script>
+    document.getElementById("campusForm").submit();
+  </script>
+</body>
+</html>
